@@ -4,13 +4,15 @@ import { ServiceName } from "./typings/define";
 (async () => {
   const myapp = DarukServer();
 
+  // load File
+  await myapp.loadFile('./services');
+
   @controller()
   class Index {
-    // 以下注入后报错
-    // @inject(ServiceName.Test) private _test;
+    @inject(ServiceName.Test) private _test;
     @get("/")
     public async index(ctx: any) {
-      // this._test.log();
+      this._test.log();
       ctx.body = "hello world";
     }
   }
